@@ -1,6 +1,7 @@
-# IDE
+# IDE and system
 /.nbproject
 /.idea
+/.DS_Store
 
 # Target test folder
 /testing

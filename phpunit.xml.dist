@@ -9,10 +9,16 @@
          stopOnFailure="false"
          syntaxCheck="false"
          bootstrap="src/autoload.php"
->
+    >
     <testsuites>
         <testsuite name="Silexor Test Suite">
             <directory>src/Silexor/Tests/</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <blacklist>
+            <directory>vendor</directory>
+        </blacklist>
+    </filter>
 </phpunit>
