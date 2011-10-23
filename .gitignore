@@ -1,0 +1,6 @@
+# IDE
+/.nbproject
+/.idea
+
+# Target test folder
+/testing
