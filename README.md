@@ -15,6 +15,8 @@ And uses Twig to generate base files.
 
 Silexor is inspired by the SensioGeneratorBundle for the Symfony framework.
 
+Find more information about Silex on http://silex.sensiolabs.org/
+
 ## Installation
 
 	git clone git://github.com/benja-M-1/Silexor.git
