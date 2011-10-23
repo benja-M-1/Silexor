@@ -29,6 +29,5 @@ class Application extends BaseApplication
         parent::__construct('silexor', self::VERSION);
 
         $this->add(new GenerateProjectCommand());
-
     }
 }

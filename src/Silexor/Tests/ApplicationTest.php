@@ -1,10 +1,14 @@
 <?php
 
-class ApplicationTest extends PHPUnit_Framework_TestCase
+namespace Silexor\Tests;
+
+use Silexor\Application;
+
+class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
     public function testName()
     {
-        $application = new Silexor\Application();
+        $application = new Application();
 
         $this->assertEquals('silexor', $application->getName());
         $this->assertTrue($application->has('project:generate'));

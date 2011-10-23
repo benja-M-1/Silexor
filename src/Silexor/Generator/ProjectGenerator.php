@@ -38,6 +38,12 @@ class ProjectGenerator extends Generator
      */
     protected $filesystem;
 
+    /**
+     * Constructor
+     * 
+     * @param $name
+     * @param $path
+     */
     public function __construct($name, $path)
     {
         $this->name = $name;
@@ -45,6 +51,12 @@ class ProjectGenerator extends Generator
         $this->filesystem = new Filesystem();
     }
 
+    /**
+     * Generates a basic Silex app.
+     * 
+     * @throws \Exception|\RuntimeException
+     * @return void
+     */
     public function generate()
     {
         $dir = $this->path.'/'.$this->name;
