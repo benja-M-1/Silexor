@@ -1,0 +1,9 @@
+Tools to generate :
+- Silex app
+
+Todo :
+- Service provider generator
+- Controller provider generator
+
+This generator is inspired by the SensioGeneratorBundle.
+
