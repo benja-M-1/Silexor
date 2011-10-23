@@ -49,7 +49,7 @@ Once the project is generated, you can run the tests:
 
 	$ phpunit tests
 
-![PHPUnit results](https://github.com/benja-M-1/Silexor/blob/master/src/Silexor/Resources/doc/phpunit_result.png)
+![PHPUnit results](https://github.com/benja-M-1/Silexor/blob/master/src/Silexor/Resources/doc/phpunit_result.png?raw=true)
 
 
 ## Todo
