@@ -4,3 +4,6 @@
 
 # Target test folder
 /testing
+
+# Build
+/build
