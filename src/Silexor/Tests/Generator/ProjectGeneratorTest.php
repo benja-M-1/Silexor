@@ -24,8 +24,8 @@ class ProjectGeneratorTest extends GeneratorTest
 {
     public function testGenerate()
     {
-        $generator = new ProjectGenerator('test', $this->tmpDir);
-        $generator->generate();
+        $generator = new ProjectGenerator();
+        $generator->generate('test', $this->tmpDir);
 
         $files = array(
             'phpunit.xml.dist',

@@ -44,10 +44,8 @@ class ProjectGenerator extends Generator
      * @param $name
      * @param $path
      */
-    public function __construct($name, $path)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->path = $path;
         $this->filesystem = new Filesystem();
     }
 
@@ -57,8 +55,11 @@ class ProjectGenerator extends Generator
      * @throws \Exception|\RuntimeException
      * @return void
      */
-    public function generate()
+    public function generate($name, $path)
     {
+        $this->name = $name;
+        $this->path = $path;
+        
         $dir = $this->path.'/'.$this->name;
 
         // Generate the base folder

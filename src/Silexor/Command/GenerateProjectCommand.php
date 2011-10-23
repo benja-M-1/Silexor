@@ -26,17 +26,45 @@ use Silexor\Generator\ProjectGenerator;
 
 class GenerateProjectCommand extends Command
 {
+    /**
+     * @var Silexor\Generator\Generator $generator
+     */
+    protected $generator;
+
     public function configure()
     {
         $this->setName('project:generate')
             ->addArgument('name', InputArgument::REQUIRED, 'Your project name.')
-            ->addOption('path', 'p', InputOption::VALUE_OPTIONAL, 'The path where Silexor will generate the project.', '')
+            ->addOption('path', 'p', InputOption::VALUE_OPTIONAL, 'The path where Silexor will generate the project.', getcwd())
             ->setDescription('Generates the structure of a Silex project');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $generator = new ProjectGenerator($input->getArgument('name'), $input->getOption('path'));
-        $generator->generate();
+        $output->writeln(sprintf('Generating "%s" in %s.', $input->getArgument('name'), $input->getOption('path')));
+        
+        $this->getGenerator()->generate($input->getArgument('name'), $input->getOption('path'));
+
+        $output->writeln(sprintf('Project "%s" generated.', $input->getArgument('name')));
+    }
+
+    /**
+     * @param \Silexor\Command\Silexor\Generator\Generator $generator
+     */
+    public function setGenerator($generator)
+    {
+        $this->generator = $generator;
+    }
+
+    /**
+     * @return \Silexor\Command\Silexor\Generator\Generator
+     */
+    public function getGenerator()
+    {
+        if ($this->generator === null) {
+            $this->generator = new ProjectGenerator();
+        }
+        
+        return $this->generator;
     }
 }
