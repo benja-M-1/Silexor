@@ -1,4 +1,10 @@
 <?php
+/**
+ * ApplicationTest class.
+ *
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
+ * @since 23/10/2011
+ */
 
 namespace Silexor\Tests;
 

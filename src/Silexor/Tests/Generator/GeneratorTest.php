@@ -1,10 +1,9 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: benjamin
- * Date: 23/10/11
- * Time: 19:42
- * To change this template use File | Settings | File Templates.
+ * Generator class.
+ *
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
+ * @since 23/10/11
  */
 
 namespace Silexor\Tests\Generator;

@@ -1,17 +1,9 @@
 <?php
-/*
- * This file is part of the Symfony package.
- *
- * (c) Benjamin Grandfond <benjamin.grandfond@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
  * GeneratorInterface Interface
  *
  * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
+ * @author Fabien Potencier <fabien@symfony.com>
  * @since 23/10/11
  */
 
@@ -19,8 +11,12 @@ namespace Silexor\Generator;
 
 class Generator
 {
-    public function renderFile($skeletonDir, $template, $target, $parameters = array())
+    protected function renderFile($skeletonDir, $template, $target, $parameters = array())
     {
+        if (!is_dir(dirname($target))) {
+            mkdir(dirname($target), 0777, true);
+        }
+
         $twig = new \Twig_Environment(new \Twig_Loader_Filesystem($skeletonDir), array(
             'debug'            => true,
             'cache'            => false,
