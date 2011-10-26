@@ -27,14 +27,15 @@ class GenerateProjectCommand extends Command
         $this->setName('project:generate')
             ->addArgument('name', InputArgument::REQUIRED, 'Your project name.')
             ->addOption('path', 'p', InputOption::VALUE_OPTIONAL, 'The path where Silexor will generate the project.', getcwd())
+            ->addOption('providers', null, InputOption::VALUE_IS_ARRAY, 'The path where Silexor will generate the project.')
             ->setDescription('Generates the structure of a Silex project');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln(sprintf('Generating "%s" in %s.', $input->getArgument('name'), $input->getOption('path')));
-        
-        $this->getGenerator()->generate($input->getArgument('name'), $input->getOption('path'));
+
+        $this->getGenerator()->generate($input->getArgument('name'), $input->getOption('path'), $input->getOption('providers'));
 
         $output->writeln(sprintf('Project "%s" generated.', $input->getArgument('name')));
     }

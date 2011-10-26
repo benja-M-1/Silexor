@@ -25,6 +25,11 @@ class ProjectGenerator extends Generator
     protected $path;
 
     /**
+     * @var Array $providers
+     */
+    protected $providers;
+
+    /**
      * @var Symfony\Component\HttpKernel\Util\Filesystem $filesystem
      */
     protected $filesystem;
@@ -44,12 +49,17 @@ class ProjectGenerator extends Generator
      * Generates a basic Silex app.
      * 
      * @throws \Exception|\RuntimeException
+     *
+     * @param String $name The Silex application name.
+     * @param String $path The Silex application path.
+     * @param Array $providers The providers to add to tje Silex application.
      * @return void
      */
-    public function generate($name, $path)
+    public function generate($name, $path, $providers = array())
     {
         $this->name = $name;
         $this->path = $path;
+        $this->providers = $providers;
         
         $dir = $this->path.'/'.$this->name;
 
@@ -68,7 +78,7 @@ class ProjectGenerator extends Generator
             $phar = file_get_contents('http://silex.sensiolabs.org/get/silex.phar');
             file_put_contents($dir.'/vendor/silex.phar', $phar);
 
-            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'App.php', $dir.'/src/app.php');
+            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'App.php', $dir.'/src/app.php', array('proivders' => $this->providers));
             $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'Bootstrap.php', $dir.'/tests/bootstrap.php');
             $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'ControllerTest.php', $dir.'/tests/ControllerTest.php');
             $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'Index.php', $dir.'/web/index.php');
