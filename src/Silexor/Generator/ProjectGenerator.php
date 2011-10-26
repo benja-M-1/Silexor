@@ -8,7 +8,8 @@
 
 namespace Silexor\Generator;
 
-use Symfony\Component\HttpKernel\Util\Filesystem;
+use Silexor\Util\Filesystem;
+use Silexor\ProviderInstaller\ProviderInstaller;
 
 class ProjectGenerator extends Generator
 {
@@ -36,7 +37,7 @@ class ProjectGenerator extends Generator
 
     /**
      * Constructor
-     * 
+     *
      * @param $name
      * @param $path
      */
@@ -47,7 +48,7 @@ class ProjectGenerator extends Generator
 
     /**
      * Generates a basic Silex app.
-     * 
+     *
      * @throws \Exception|\RuntimeException
      *
      * @param String $name The Silex application name.
@@ -60,7 +61,7 @@ class ProjectGenerator extends Generator
         $this->name = $name;
         $this->path = $path;
         $this->providers = $providers;
-        
+
         $dir = $this->path.'/'.$this->name;
 
         // Generate the base folder
@@ -78,6 +79,12 @@ class ProjectGenerator extends Generator
             $phar = file_get_contents('http://silex.sensiolabs.org/get/silex.phar');
             file_put_contents($dir.'/vendor/silex.phar', $phar);
 
+            /**
+             * @todo generate a composer.json into the app
+             *       add the requirements and then launch Composer
+             */
+            $this->installProviders();
+
             $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'App.php', $dir.'/src/app.php', array('proivders' => $this->providers));
             $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'Bootstrap.php', $dir.'/tests/bootstrap.php');
             $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'ControllerTest.php', $dir.'/tests/ControllerTest.php');
@@ -86,6 +93,20 @@ class ProjectGenerator extends Generator
         } catch (\Exception $e) {
             $this->filesystem->remove($dir);
             throw $e;
+        }
+    }
+
+    /**
+     * Install wanted providers.
+     *
+     * @return void
+     */
+    public function installProviders()
+    {
+        $installer = new ProviderInstaller();
+
+        foreach ($this->providers as $provider) {
+            $installer->install($provider);
         }
     }
 }

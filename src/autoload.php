@@ -10,9 +10,9 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
-    'Symfony' => __DIR__.'/../vendor',
-    'Silex'   => __DIR__.'/../vendor',
-    'Silexor' => __DIR__,
+    'Symfony'  => __DIR__.'/../vendor',
+    'Composer' => __DIR__.'/../vendor',
+    'Silexor'  => __DIR__,
 ));
 
 $loader->registerPrefixes(array(
