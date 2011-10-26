@@ -13,3 +13,6 @@
 [submodule "vendor/Twig"]
 	path = vendor/Twig
 	url = https://github.com/fabpot/Twig.git
+[submodule "vendor/Composer"]
+	path = vendor/Composer
+	url = https://github.com/composer/composer.git

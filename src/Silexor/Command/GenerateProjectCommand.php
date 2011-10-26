@@ -27,7 +27,7 @@ class GenerateProjectCommand extends Command
         $this->setName('project:generate')
             ->addArgument('name', InputArgument::REQUIRED, 'Your project name.')
             ->addOption('path', 'p', InputOption::VALUE_OPTIONAL, 'The path where Silexor will generate the project.', getcwd())
-            ->addOption('providers', null, InputOption::VALUE_IS_ARRAY, 'The path where Silexor will generate the project.')
+            ->addOption('providers', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'The providers to add to the Silex application (doctrine, twig ...).')
             ->setDescription('Generates the structure of a Silex project');
     }
 
