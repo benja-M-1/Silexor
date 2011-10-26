@@ -9,7 +9,6 @@ It is based on the awesome Symfony components:
 * ClassLoader
 * Yaml
 * Console
-* HttpKernel (only for the Filesystem class)
 
 And uses Twig to generate base files.
 
