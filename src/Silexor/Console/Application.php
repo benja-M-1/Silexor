@@ -20,21 +20,8 @@ class Application extends BaseApplication
     public function __construct()
     {
         parent::__construct('silexor', self::VERSION);
-    }
 
-    /**
-     * Runs the current application.
-     *
-     * @param InputInterface  $input  An Input instance
-     * @param OutputInterface $output An Output instance
-     *
-     * @return integer 0 if everything went fine, or an error code
-     */
-    public function doRun(InputInterface $input, OutputInterface $output)
-    {
         $this->registerCommands();
-
-        return parent::doRun($input, $output);
     }
 
     /**

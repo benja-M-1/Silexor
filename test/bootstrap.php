@@ -11,7 +11,7 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
     'Symfony'  => __DIR__.'/../vendor',
-    'Silex'    => __DIR__.'/../vendor',
+    'Composer' => __DIR__.'/../vendor/Composer/src',
     'Silexor'  => array(__DIR__.'/../src', __DIR__),
 ));
 

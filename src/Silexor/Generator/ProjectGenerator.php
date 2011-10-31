@@ -37,6 +37,16 @@ class ProjectGenerator extends Generator
     protected $filesystem;
 
     /**
+     * @var Silexor\Installer\InstallerInterface
+     */
+    protected $silexInstaller;
+
+    /**
+     * @var Silexor\Installer\InstallerInterface
+     */
+    protected $composerInstaller;
+
+    /**
      * Constructor
      *
      * @param $name
@@ -52,9 +62,10 @@ class ProjectGenerator extends Generator
      *
      * @throws \Exception|\RuntimeException
      *
-     * @param String $name The Silex application name.
-     * @param String $path The Silex application path.
-     * @param Array $providers The providers to add to tje Silex application.
+     * @param String  $name      The Silex application name.
+     * @param String  $path      The Silex application path.
+     * @param Array   $providers The providers to add to the Silex application.
+     * @param Boolean $clear     Removes the existing folder.
      * @return void
      */
     public function generate($name, $path, $providers = array(), $clear = false)
@@ -81,12 +92,12 @@ class ProjectGenerator extends Generator
             $this->filesystem->mkdir($this->dir.'/vendor');
             $this->filesystem->mkdir($this->dir.'/web');
 
-            $silexInstaller = new SilexInstaller();
+            $silexInstaller = $this->getSilexInstaller();
             $silexInstaller->download($this->dir.'/vendor');
 
-            $composerInstaller = new ComposerInstaller();
+            $composerInstaller = $this->getComposerInstaller();
             $composerInstaller->download($this->dir);
-            $composerInstaller->downloadPackages($this->dir, $providers);
+            $composerInstaller->downloadPackages($this->dir.'/vendor', $providers);
 
             $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'App.php', $this->dir.'/src/app.php', array('proivders' => $this->providers));
             $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'Bootstrap.php', $this->dir.'/tests/bootstrap.php');
@@ -97,5 +108,45 @@ class ProjectGenerator extends Generator
             $this->filesystem->remove($this->dir);
             throw $e;
         }
+    }
+
+    /**
+     * @return Silexor\Installer\InstallerInterface
+     */
+    public function getSilexInstaller()
+    {
+        if ($this->silexInstaller === null) {
+            $this->silexInstaller = new SilexInstaller();
+        }
+
+        return $this->silexInstaller;
+    }
+
+    /**
+     * @param Silexor\Installer\InstallerInterface $silexInstaller
+     */
+    public function setSilexInstaller($silexInstaller)
+    {
+        $this->silexInstaller = $silexInstaller;
+    }
+
+    /**
+     * @return Silexor\Installer\InstallerInterface
+     */
+    public function getComposerInstaller()
+    {
+        if ($this->composerInstaller === null) {
+            $this->composerInstaller = new ComposerInstaller();
+        }
+
+        return $this->composerInstaller;
+    }
+
+    /**
+     * @param Silexor\Installer\InstallerInterface $composerInstaller
+     */
+    public function setComposerInstaller($composerInstaller)
+    {
+        $this->composerInstaller = $composerInstaller;
     }
 }

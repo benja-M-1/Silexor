@@ -8,11 +8,17 @@
 
 namespace Silexor\Installer;
 
-use Silexor\Generator\JsonComposerGenerator;
+use Silexor\Installer\InstallerInterface;
 use Symfony\Component\Process\Process;
+use Composer\Json\JsonFile;
 
 class ComposerInstaller implements InstallerInterface
 {
+    /**
+     * Packages for which Silex provides
+     * Service Providers.
+     * @var array
+     */
     protected $packages = array(
         'form'        => array('name' => 'symfony/form',        'version' => '>=2.0'),
         'monolog'     => array('name' => 'monolog/monolog',     'version' => '>=1.0.0'),
@@ -32,7 +38,7 @@ class ComposerInstaller implements InstallerInterface
      * Composer configuration file.
      * @var string
      */
-    protected $filename = "composer.json";
+    protected $jsonname = "composer.json";
 
     /**
      * Downloads Composer PHP Archive.
@@ -43,27 +49,34 @@ class ComposerInstaller implements InstallerInterface
     public function download($path)
     {
         $phar = file_get_contents('http://getcomposer.org/composer.phar');
-        file_put_contents($path.'/'.$this->pharname, $phar);
+        file_put_contents($path.'/'.$this->getPharname(), $phar);
     }
 
     /**
      * Install composer packages.
      *
-     * @param $path
-     * @param $packages
-     * @return integer The proces return value.
+     * @param string $path
+     * @param array $packages
+     * @return integer The process returned value.
      */
     public function downloadPackages($path, $packages)
     {
+        if (empty($packages)) {
+            return 0;
+        }
+
         $this->generate($path, $packages);
 
-        $process = new Process('php '.$this->pharname.' install', realpath($path));
+        $process = new Process('php '.$this->getPharname().' install', realpath($path));
         $process->setTimeout(3);
         $process->run();
+
         if (!$process->isSuccessful()) {
             throw new RuntimeException($process->getErrorOutput());
         }
         echo $process->getOutput();
+
+        return $process->getExitCode();
     }
 
     /**
@@ -77,7 +90,7 @@ class ComposerInstaller implements InstallerInterface
      */
     public function generate($path, $packages)
     {
-        $file = new JsonFile($path.'/'.$this->filename);
+        $file = new JsonFile($path.'/'.$this->getJsonname());
         $requires = array();
 
         foreach ($packages as $package) {
@@ -89,5 +102,38 @@ class ComposerInstaller implements InstallerInterface
         }
 
         $file->write(array('requires' => $requires));
+    }
+
+    /**
+     * @param string $pharname
+     */
+    public function setPharname($pharname)
+    {
+        $this->pharname = $pharname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPharname()
+    {
+        return $this->pharname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getJsonname()
+    {
+        return $this->jsonname;
+    }
+
+    /**
+     * @param string $jsonname
+     * @return void
+     */
+    public function setJsonname($jsonname)
+    {
+        $this->jsonname = $jsonname;
     }
 }

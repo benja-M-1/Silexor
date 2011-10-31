@@ -1,6 +1,6 @@
 {
     "name": "silexor/silexor",
-    "type": "library",
+    "type": "application",
     "description": "Set of Silex generators",
     "version": "0.0.1",
     "authors": [
