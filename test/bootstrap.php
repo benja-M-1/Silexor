@@ -11,8 +11,8 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
     'Symfony'  => __DIR__.'/../vendor',
-    'Composer' => __DIR__.'/../vendor/Composer/src',
-    'Silexor'  => __DIR__,
+    'Silex'    => __DIR__.'/../vendor',
+    'Silexor'  => array(__DIR__.'/../src', __DIR__),
 ));
 
 $loader->registerPrefixes(array(

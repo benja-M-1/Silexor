@@ -1,7 +1,7 @@
 <?php
 /**
  * GenerateProjectCommandTest class.
- * 
+ *
  * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
  * @since 23/10/11
  */
@@ -9,7 +9,7 @@
 namespace Silexor\Tests\Command;
 
 use Symfony\Component\Console\Tester\CommandTester;
-use Silexor\Application;
+use Silexor\Console\Application;
 use Silexor\Command\GenerateProjectCommand;
 
 class GenerateProjectCommandTest extends \PHPUnit_Framework_TestCase
@@ -18,7 +18,7 @@ class GenerateProjectCommandTest extends \PHPUnit_Framework_TestCase
     {
         $name = 'test';
         $path = __DIR__.'/../../tmp';
-        
+
         $generator = $this->getGenerator();
         $generator->expects($this->once())
             ->method('generate')

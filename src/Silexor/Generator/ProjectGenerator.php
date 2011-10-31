@@ -9,7 +9,8 @@
 namespace Silexor\Generator;
 
 use Silexor\Util\Filesystem;
-use Silexor\ProviderInstaller\ProviderInstaller;
+use Silexor\Installer\SilexInstaller;
+use Silexor\Installer\ComposerInstaller;
 
 class ProjectGenerator extends Generator
 {
@@ -56,57 +57,45 @@ class ProjectGenerator extends Generator
      * @param Array $providers The providers to add to tje Silex application.
      * @return void
      */
-    public function generate($name, $path, $providers = array())
+    public function generate($name, $path, $providers = array(), $clear = false)
     {
         $this->name = $name;
         $this->path = $path;
         $this->providers = $providers;
 
-        $dir = $this->path.'/'.$this->name;
+        $this->dir = $this->path.'/'.$this->name;
 
         // Generate the base folder
-        if (file_exists($dir)) {
-            throw new \RuntimeException(sprintf('Unable to generate the bundle as the target directory "%s" is not empty.', realpath($dir)));
+        if (file_exists($this->dir)) {
+            if ($clear) {
+                $this->filesystem->remove($this->dir);
+            } else {
+                throw new \RuntimeException(sprintf('Unable to generate the bundle as the target directory "%s" is not empty.', realpath($this->dir)));
+            }
         }
 
         try {
-            $this->filesystem->mkdir($dir);
-            $this->filesystem->mkdir($dir.'/src');
-            $this->filesystem->mkdir($dir.'/tests');
-            $this->filesystem->mkdir($dir.'/vendor');
-            $this->filesystem->mkdir($dir.'/web');
+            $this->filesystem->mkdir($this->dir);
+            $this->filesystem->mkdir($this->dir.'/src');
+            $this->filesystem->mkdir($this->dir.'/tests');
+            $this->filesystem->mkdir($this->dir.'/vendor');
+            $this->filesystem->mkdir($this->dir.'/web');
 
-            $phar = file_get_contents('http://silex.sensiolabs.org/get/silex.phar');
-            file_put_contents($dir.'/vendor/silex.phar', $phar);
+            $silexInstaller = new SilexInstaller();
+            $silexInstaller->download($this->dir.'/vendor');
 
-            /**
-             * @todo generate a composer.json into the app
-             *       add the requirements and then launch Composer
-             */
-            $this->installProviders();
+            $composerInstaller = new ComposerInstaller();
+            $composerInstaller->download($this->dir);
+            $composerInstaller->downloadPackages($this->dir, $providers);
 
-            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'App.php', $dir.'/src/app.php', array('proivders' => $this->providers));
-            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'Bootstrap.php', $dir.'/tests/bootstrap.php');
-            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'ControllerTest.php', $dir.'/tests/ControllerTest.php');
-            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'Index.php', $dir.'/web/index.php');
-            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'phpunit.xml.dist', $dir.'/phpunit.xml.dist', array('name' => $this->name));
+            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'App.php', $this->dir.'/src/app.php', array('proivders' => $this->providers));
+            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'Bootstrap.php', $this->dir.'/tests/bootstrap.php');
+            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'ControllerTest.php', $this->dir.'/tests/ControllerTest.php');
+            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'Index.php', $this->dir.'/web/index.php');
+            $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'phpunit.xml.dist', $this->dir.'/phpunit.xml.dist', array('name' => $this->name));
         } catch (\Exception $e) {
-            $this->filesystem->remove($dir);
+            $this->filesystem->remove($this->dir);
             throw $e;
-        }
-    }
-
-    /**
-     * Install wanted providers.
-     *
-     * @return void
-     */
-    public function installProviders()
-    {
-        $installer = new ProviderInstaller();
-
-        foreach ($this->providers as $provider) {
-            $installer->install($provider);
         }
     }
 }

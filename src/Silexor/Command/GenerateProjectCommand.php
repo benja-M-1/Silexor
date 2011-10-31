@@ -35,7 +35,7 @@ class GenerateProjectCommand extends Command
     {
         $output->writeln(sprintf('Generating "%s" in %s.', $input->getArgument('name'), $input->getOption('path')));
 
-        $this->getGenerator()->generate($input->getArgument('name'), $input->getOption('path'), $input->getOption('providers'));
+        $this->getGenerator()->generate($input->getArgument('name'), $input->getOption('path'), $input->getOption('providers'), true);
 
         $output->writeln(sprintf('Project "%s" generated.', $input->getArgument('name')));
     }
@@ -56,7 +56,7 @@ class GenerateProjectCommand extends Command
         if ($this->generator === null) {
             $this->generator = new ProjectGenerator();
         }
-        
+
         return $this->generator;
     }
 }

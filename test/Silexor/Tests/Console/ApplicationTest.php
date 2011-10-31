@@ -6,9 +6,9 @@
  * @since 23/10/2011
  */
 
-namespace Silexor\Tests;
+namespace Silexor\Tests\Console;
 
-use Silexor\Application;
+use Silexor\Console\Application;
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
