@@ -3,7 +3,7 @@
 /**
  * InstallerInterface Interface
  *
- * @author Benjamin Grandfond <benjaming@theodo.fr>
+ * @author Benjamin Grandfond <benjamin.grandfond@gmail.com>
  * @since 31/10/11
  */
 
