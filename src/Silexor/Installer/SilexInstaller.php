@@ -15,7 +15,7 @@ class SilexInstaller implements InstallerInterface
     public function download($path)
     {
         $phar = file_get_contents('http://silex.sensiolabs.org/get/silex.phar');
-        file_put_contents($path.'/'.$this->pharname, $phar);
+        file_put_contents($path.'/'.$this->getPharname(), $phar);
     }
 
     /**

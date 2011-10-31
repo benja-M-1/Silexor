@@ -97,7 +97,7 @@ class ProjectGenerator extends Generator
 
             $composerInstaller = $this->getComposerInstaller();
             $composerInstaller->download($this->dir);
-            $composerInstaller->downloadPackages($this->dir.'/vendor', $providers);
+            $composerInstaller->downloadPackages($this->dir, $providers);
 
             $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'App.php', $this->dir.'/src/app.php', array('proivders' => $this->providers));
             $this->renderFile(__DIR__.'/../Resources/skeleton/project', 'Bootstrap.php', $this->dir.'/tests/bootstrap.php');
