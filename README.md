@@ -56,6 +56,6 @@ Once the project is generated, you can run the tests:
 
 ## TODO
 
-* Providing options lo add services in the generation of the app.php file (doctrine, twig, ...)
+* Providing options to add services in the generation of the app.php file (doctrine, twig, ...) -> see feature/providerinstaller for a workaround with composer
 * Service provider generator
 * Controller provider generator
