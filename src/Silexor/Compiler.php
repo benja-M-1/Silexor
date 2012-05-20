@@ -39,7 +39,7 @@ class Compiler
         $finder->files()
             ->ignoreVCS(true)
             ->name('*.php')
-            ->name('*.twig')
+            ->name('*.dist')
             ->in(__DIR__.'/..')
             ->notName('Compiler.php')
             ->exclude('Tests');
