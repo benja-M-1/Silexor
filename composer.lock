@@ -1,22 +1,17 @@
 {
-    "hash": "9b8921d4a0560e3cd15a98fb98e28a06",
+    "hash": "243f40c1e4bec88649aaaa007e540382",
     "packages": [
-        {
-            "package": "symfony/console",
-            "version": "dev-master",
-            "source-reference": "1edd7b739561e87bde81ff1c2ce08bd89e92277e",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
         {
             "package": "symfony/console",
             "version": "dev-master",
             "source-reference": "1edd7b739561e87bde81ff1c2ce08bd89e92277e"
         },
         {
-            "package": "symfony/filesystem",
+            "package": "symfony/console",
             "version": "dev-master",
-            "source-reference": "e1f7c293c029502921d77f914275b411f80ccbca"
+            "source-reference": "1edd7b739561e87bde81ff1c2ce08bd89e92277e",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/filesystem",
@@ -26,11 +21,26 @@
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
-            "package": "symfony/yaml",
+            "package": "symfony/filesystem",
             "version": "dev-master",
-            "source-reference": "49ad500448c17a4b515c8f567dbb540af3cf41ef",
+            "source-reference": "e1f7c293c029502921d77f914275b411f80ccbca"
+        },
+        {
+            "package": "symfony/finder",
+            "version": "dev-master",
+            "source-reference": "a2cef64d5072b284b671ee8e06b8ebc38c2969e1",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/finder",
+            "version": "dev-master",
+            "source-reference": "a2cef64d5072b284b671ee8e06b8ebc38c2969e1"
+        },
+        {
+            "package": "twig/twig",
+            "version": "dev-master",
+            "source-reference": "e28663efd83d76ee36bf9e8a790f75bd880abbf2"
         },
         {
             "package": "twig/twig",
@@ -38,11 +48,6 @@
             "source-reference": "e28663efd83d76ee36bf9e8a790f75bd880abbf2",
             "alias-pretty-version": "1.8.x-dev",
             "alias-version": "1.8.9999999.9999999-dev"
-        },
-        {
-            "package": "twig/twig",
-            "version": "dev-master",
-            "source-reference": "e28663efd83d76ee36bf9e8a790f75bd880abbf2"
         }
     ],
     "packages-dev": null,
