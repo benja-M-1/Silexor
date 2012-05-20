@@ -6,10 +6,8 @@ Silexor is a set of commands that accelerate your Silex app generation.
 
 It is based on the awesome Symfony components:
 
-* ClassLoader
-* Yaml
 * Console
-* HttpKernel (only for the Filesystem class)
+* Filesystem
 
 And uses Twig to generate base files.
 
@@ -19,15 +17,13 @@ Find more information about Silex at http://silex.sensiolabs.org/
 
 ## Installation
 
-    git clone git://github.com/benja-M-1/Silexor.git
-    git submodule update --init --recursive
-
+Download the php archive from here : https://github.com/benja-M-1/Silexor/raw/master/silexor.phar
 
 ## Usage
 
 ### Generate a Silex project
 
-    $ php src/console project:generate MyProject --path='/path/to/your/project'
+    $ php silexor.phar project:generate MyProject --path='/path/to/your/project'
 
 This command will generate your Silex app under the MyProject folder in `/path/to/your/project`.
 
