@@ -8,3 +8,6 @@
 
 # Build
 /build
+
+# Vendors
+/vendor

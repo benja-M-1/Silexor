@@ -8,7 +8,7 @@
 
 namespace Silexor\Generator;
 
-use Symfony\Component\HttpKernel\Util\Filesystem;
+use Symfony\Component\Filesystem\Filesystem;
 
 class ProjectGenerator extends Generator
 {
@@ -25,13 +25,13 @@ class ProjectGenerator extends Generator
     protected $path;
 
     /**
-     * @var Symfony\Component\HttpKernel\Util\Filesystem $filesystem
+     * @var Symfony\Component\Filesystem\Filesystem $filesystem
      */
     protected $filesystem;
 
     /**
      * Constructor
-     * 
+     *
      * @param $name
      * @param $path
      */
@@ -42,7 +42,7 @@ class ProjectGenerator extends Generator
 
     /**
      * Generates a basic Silex app.
-     * 
+     *
      * @throws \Exception|\RuntimeException
      * @return void
      */
@@ -50,7 +50,7 @@ class ProjectGenerator extends Generator
     {
         $this->name = $name;
         $this->path = $path;
-        
+
         $dir = $this->path.'/'.$this->name;
 
         // Generate the base folder

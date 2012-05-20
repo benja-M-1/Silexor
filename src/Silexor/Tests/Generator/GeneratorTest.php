@@ -8,7 +8,7 @@
 
 namespace Silexor\Tests\Generator;
 
-use Symfony\Component\HttpKernel\Util\Filesystem;
+use Symfony\Component\Filesystem\Filesystem;
 
 abstract class GeneratorTest extends \PHPUnit_Framework_TestCase
 {
